@@ -8,13 +8,11 @@ const input = fs.readFileSync("input2.txt").toString()
 const rounds = input.split("\n");
 
 const parseSet = str => {
-    const parts = str.split(",")
-    const set = { red: 0, green: 0, blue: 0 }
-    for (let i = 0; i < parts.length; i++) {
-        const [count, type] = parts[i].trim().split(" ");
-        set[type] = parseInt(count)
-    }
-    return set
+    return str.split(",").reduce((acc, item) => {
+        const [count, type] = item.trim().split(" ");
+        acc[type] = parseInt(count)
+        return acc
+    }, { red: 0, green: 0, blue: 0 })
 }
 
 const getFewestCube = row => {
